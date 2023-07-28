@@ -9,6 +9,7 @@ public class Imprimir {
     static final String USER="root";
     static final String PASS="root_bas3";
     static final String QUERY= "SELECT * FROM ESTUDIANTES";
+    //static final String QUERY= "SELECT * FROM ESTUDIANTES where id=202020211";
     private JButton imprimirButton;
     private JPanel rootPanel;
     private JTextField textoPanel;
