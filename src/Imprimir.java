@@ -10,7 +10,7 @@ public class Imprimir {
     static final String PASS="root_bas3";
     static final String QUERY= "SELECT * FROM ESTUDIANTES";
     //static final String QUERY= "SELECT * FROM ESTUDIANTES where id=202020211";
-    private JButton imprimirButton;
+    private JButton eliminarButton;
     private JPanel rootPanel;
     private JTextField textoPanel;
 
@@ -27,13 +27,22 @@ public class Imprimir {
         catch (SQLException e){
             throw new RuntimeException(e);
         }
-    imprimirButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            textoPanel.setText("Hola");
-        }
-    });
-}
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = Integer.parseInt(textoPanel.getText());
+                String query = "DELETE FROM ESTUDIANTES WHERE id = " + id;
+                try (
+                        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                        Statement stmt = conn.createStatement();
+                ) {
+                    stmt.executeUpdate(query);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+    }
     public static void main(String[] args) {
         JFrame frame = new JFrame("Imprimir");
         frame.setContentPane(new Imprimir().rootPanel);
